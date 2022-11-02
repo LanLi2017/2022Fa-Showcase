@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+from pathlib import Path
 
 def sep_ds(ds):
     """
@@ -90,6 +91,8 @@ def main(flag='train'):
     # //projects/bbno/lanl2/2022Fa-Showcase/data/entity_linking_data/train.txt.entityLinking.prompt=0.dk
     # flag = 'train'
     dirty_data_1,  dirty_data_2 = split_ds_wf(flag)
+    print(dirty_data_1)
+
     filename = f'../data/entity_linking_data/{flag}.txt.entityLinking.prompt=0.dk'
     e1_list, e2_list = extract_labels(filename)
     # /projects/bbno/lanl2/2022Fa-Showcase/data/Exp_data/Dirty/df1_Dirty_iTunes-Amazon.csv
@@ -106,11 +109,23 @@ def main(flag='train'):
         if row:
             dirty_df1['Song_Name_Clean'].iloc[i] = row[0]
     
+    for j,row_j in enumerate(e2_list):
+        if row_j:
+            dirty_df2['Song_Name_Clean'].iloc[j] = row_j[0]
+    
     clean_d1 = f'../data/Exp_data/Clean/df1_iTunes_{flag}_clean.csv' 
-    dirty_df1.to_csv(clean_d1, index=False)
+    clean_d2 = f'../data/Exp_data/Clean/df2_Amazon_{flag}_clean.csv' 
+    d1_path = Path(clean_d1)
+    d2_path = Path(clean_d2)
+    if not d1_path.exists():
+        dirty_df1.to_csv(clean_d1, index=False)
+    if not d2_path.exists():
+        dirty_df2.to_csv(clean_d2, index=False)
 
 
 if __name__ == '__main__':
-    flag = 'train'
+    # flag = 'train'
+    # flag = 'test'
+    flag = 'valid'
     main(flag)
     # split_ds_wf()
