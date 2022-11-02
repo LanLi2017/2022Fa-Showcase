@@ -35,6 +35,7 @@ def main():
 
         df1_csv = f'OpenRefine_Output/df1_iTunes_{flag}_clean_final.csv'
         df2_csv = f'OpenRefine_Output/df2_Amazon_{flag}_clean_final.csv'
+        print(df1_csv)
         out_fn = f'ditto_input/{flag}.txt'
         df1 = pd.read_csv(df1_csv, index_col=False)
         df2 = pd.read_csv(df2_csv, index_col=False)

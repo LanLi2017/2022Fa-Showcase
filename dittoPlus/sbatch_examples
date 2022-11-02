@@ -11,9 +11,11 @@
 #SBATCH --mem=40g
 #SBATCH --job-name=vanilla-sherlock
 #SBATCH --time=06:00:00      # hh:mm:ss for the job
+#SBATCH --output="Exp_Logging/iTunes.Amazon.structured.dk=None.%j.%N.out"
+##SBATCH --output="Exp_Logging/iTunes.Amazon.clean.%j.%N.out"
 ##SBATCH --output="Exp_Logging/Company.sherlock.textual.%j.%N.out"
 ##SBATCH --output="Exp_Logging/Abt.Buy.sherlock.textual.prompt.0.%j.%N.out"
-#SBATCH --output="Exp_Logging/iTunes.Amazon.dirty.%j.%N.out"
+##SBATCH --output="Exp_Logging/iTunes.Amazon.dirty.%j.%N.out"
 ##SBATCH --output="Exp_Logging/DBLP.Google.sherlock.dirty.%j.%N.out"
 ##SBATCH --output="Exp_Logging/Amazon.Google.sherlock.structured.%j.%N.out"
 ##SBATCH --output="Exp_Logging/iTunes.Amazon.sherlock.structured.%j.%N.out"
@@ -24,28 +26,6 @@
 ##SBATCH --mail-type="BEGIN,END" See sbatch or srun man pages for more email options 
  
 export PYTHONPATH=$PYTHONPATH:/projects/bbno/yirenl2/ReFinED/src
-python train_ditto.py --task Dirty/iTunes-Amazon
-
-# python train_ditto.py --dk sherlock --task Dirty/iTunes-Amazon
-# python train_ditto.py --dk sherlock --task Dirty/iTunes-Amazon --prompt 2
-# python train_ditto.py --task Structured/DBLP-ACM
-# python train_ditto.py --dk sherlock --task Structured/DBLP-ACM --prompt 1
-# python train_ditto.py --dk sherlock --task Structured/DBLP-ACM --prompt 2
-# python train_ditto.py --dk sherlock --task Structured/DBLP-GoogleScholar
-# python train_ditto.py --dk sherlock --task Structured/DBLP-GoogleScholar --prompt 1
-# python train_ditto.py --dk sherlock --task Structured/DBLP-GoogleScholar --prompt 2
-# python train_ditto.py --dk sherlock --task Structured/iTunes-Amazon
-# python train_ditto.py --dk sherlock --task Structured/iTunes-Amazon --prompt 1
-# python train_ditto.py --dk sherlock --task Structured/iTunes-Amazon --prompt 2
-# python train_ditto.py --dk sherlock --task Structured/Amazon-Google
-# python train_ditto.py --dk sherlock --task Structured/Amazon-Google --prompt 1
-# python train_ditto.py --dk sherlock --task Structured/Amazon-Google --prompt 2
-# python train_ditto.py --dk sherlock --task Dirty/iTunes-Amazon
-# python train_ditto.py --dk sherlock --task Dirty/iTunes-Amazon --prompt 1
-# python train_ditto.py --dk sherlock --task Dirty/iTunes-Amazon --prompt 2
-# python train_ditto.py --dk sherlock --task Textual/Company
-# python train_ditto.py --dk sherlock --task Textual/Company --prompt 1
-# python train_ditto.py --dk sherlock --task Textual/Company --prompt 2
-# python train_ditto.py --dk sherlock --task Textual/Abt-Buy
-# python train_ditto.py --dk sherlock --task Textual/Abt-Buy --prompt 1
-# python train_ditto.py --dk sherlock --task Textual/Abt-Buy --prompt 2
+python train_ditto.py --task Structured/iTunes-Amazon
+# python train_ditto.py --task Dirty/iTunes-Amazon
+# python train_ditto.py --task Clean/iTunes-Amazon

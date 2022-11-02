@@ -14,5 +14,13 @@
     "trainset": "../data/Exp_data/ditto_input/train.txt",
     "validset": "../data/Exp_data/ditto_input/valid.txt",
     "testset": "../data/Exp_data/ditto_input/test.txt"
-  }
+  },
+  {
+    "name": "Structured/iTunes-Amazon",
+    "task_type": "classification",
+    "vocab": ["0", "1"],
+    "trainset": "../data/er_magellan/Structured/iTunes-Amazon/train.txt",
+    "validset": "../data/er_magellan/Structured/iTunes-Amazon/valid.txt",
+    "testset": "../data/er_magellan/Structured/iTunes-Amazon/test.txt"
+    }
 ]
