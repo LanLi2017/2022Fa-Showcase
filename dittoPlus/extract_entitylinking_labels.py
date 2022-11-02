@@ -46,13 +46,17 @@ def create_input_ds(ds_f):
         return df_1, df_2, df_3
 
 
-def split_ds(flag='train',input_fn='../data/ditto/er_magellan/Dirty/iTunes-Amazon/train.txt'):
-    df1, df2, df3 = create_input_ds(input_fn) # the first dataset, the second dataset, and the flag
-    # df1: the first dataset; df2: the second dataset; df3: the pairing result
+def split_ds(flag='train', input_fn='../data/ditto/er_magellan/Dirty/iTunes-Amazon/train.txt', overwrite=False):
     df1_raw_filename_csv = f'../data/Exp_data/Dirty/df1_iTunes_{flag}.csv' 
-    df2_raw_filename_csv = f'../data/Exp_data/Dirty/df2_Amazon_{flag}.csv' 
-    df1.to_csv(df1_raw_filename_csv, index=False)
-    df2.to_csv(df2_raw_filename_csv, index=False)
+    df2_raw_filename_csv = f'../data/Exp_data/Dirty/df2_Amazon_{flag}.csv'
+    if overwrite:
+        df1, df2, df3 = create_input_ds(input_fn) # the first dataset, the second dataset, and the flag
+        # df1: the first dataset; df2: the second dataset; df3: the pairing result
+        df1.to_csv(df1_raw_filename_csv, index=False)
+        df2.to_csv(df2_raw_filename_csv, index=False)
+    else:
+        pass
+    return df1_raw_filename_csv, df2_raw_filename_csv
 
                 
 def extract_labels(fname):
@@ -74,31 +78,39 @@ def extract_labels(fname):
     return e1_label_list, e2_label_list
 
 
-def split_ds_wf():
+def split_ds_wf(flag):
     # flag='test'
-    flag = 'valid'
+    # flag = 'valid'
     input_fn=f'../data/ditto/er_magellan/Dirty/iTunes-Amazon/{flag}.txt'
-    # split_ds(flag, input_fn)
-    return input_fn
+    res1, res2 = split_ds(flag, input_fn, overwrite=False)
+    return res1, res2
 
 
-def main():
+def main(flag='train'):
     # //projects/bbno/lanl2/2022Fa-Showcase/data/entity_linking_data/train.txt.entityLinking.prompt=0.dk
-    filename = '../data/entity_linking_data/train.txt.entityLinking.prompt=0.dk'
+    # flag = 'train'
+    dirty_data_1,  dirty_data_2 = split_ds_wf(flag)
+    filename = f'../data/entity_linking_data/{flag}.txt.entityLinking.prompt=0.dk'
     e1_list, e2_list = extract_labels(filename)
-    print(e2_list)
     # /projects/bbno/lanl2/2022Fa-Showcase/data/Exp_data/Dirty/df1_Dirty_iTunes-Amazon.csv
-    dirty_data_1 = '../data/Exp_data/Dirty/df1_Dirty_iTunes-Amazon.csv'
+    # dirty_data_1 = '../data/Exp_data/Dirty/df1_Dirty_iTunes-Amazon.csv'
     dirty_df1 = pd.read_csv(dirty_data_1, index_col=False)
     # /projects/bbno/lanl2/2022Fa-Showcase/data/Exp_data/Dirty/df2_Dirty_iTunes-Amazon.csv
-    dirty_data_2 = '../data/Exp_data/Dirty/df2_Dirty_iTunes-Amazon.csv'
+    # dirty_data_2 = '../data/Exp_data/Dirty/df2_Dirty_iTunes-Amazon.csv'
     dirty_df2 = pd.read_csv(dirty_data_2, index_col=False)
-    print(len(e1_list))
-    print(dirty_df1.shape[0])
     assert len(e1_list) == dirty_df1.shape[0]
     assert len(e2_list) == dirty_df2.shape[0]
+    dirty_df1['Song_Name_Clean'] = dirty_df1['Song_Name']
+    dirty_df2['Song_Name_Clean'] = dirty_df2['Song_Name']
+    for i,row in enumerate(e1_list):
+        if row:
+            dirty_df1['Song_Name_Clean'].iloc[i] = row[0]
+    
+    clean_d1 = f'../data/Exp_data/Clean/df1_iTunes_{flag}_clean.csv' 
+    dirty_df1.to_csv(clean_d1, index=False)
 
 
 if __name__ == '__main__':
-    main()
+    flag = 'train'
+    main(flag)
     # split_ds_wf()
