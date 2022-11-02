@@ -107,25 +107,32 @@ def main(flag='train'):
     dirty_df2['Song_Name_Clean'] = dirty_df2['Song_Name']
     for i,row in enumerate(e1_list):
         if row:
-            dirty_df1['Song_Name_Clean'].iloc[i] = row[0]
+            assert len(row[0]) == 2
+            dirty_df1['Song_Name_Clean'].iloc[i] = row[0][0]
+        else:
+            dirty_df1['Song_Name_Clean'].iloc[i] = ''
     
     for j,row_j in enumerate(e2_list):
         if row_j:
-            dirty_df2['Song_Name_Clean'].iloc[j] = row_j[0]
+            assert len(row_j[0]) == 2
+            dirty_df2['Song_Name_Clean'].iloc[j] = row_j[0][0]
+        else:
+            dirty_df2['Song_Name_Clean'].iloc[j] = ''
     
     clean_d1 = f'../data/Exp_data/Clean/df1_iTunes_{flag}_clean.csv' 
     clean_d2 = f'../data/Exp_data/Clean/df2_Amazon_{flag}_clean.csv' 
     d1_path = Path(clean_d1)
     d2_path = Path(clean_d2)
-    if not d1_path.exists():
-        dirty_df1.to_csv(clean_d1, index=False)
-    if not d2_path.exists():
-        dirty_df2.to_csv(clean_d2, index=False)
+    # if not d1_path.exists():
+    dirty_df1.to_csv(clean_d1, index=False)
+    # if not d2_path.exists():
+    dirty_df2.to_csv(clean_d2, index=False)
 
 
 if __name__ == '__main__':
+    for flag in ['train', 'test', 'valid']:
+        main(flag)
     # flag = 'train'
     # flag = 'test'
-    flag = 'valid'
-    main(flag)
+    # flag = 'valid'
     # split_ds_wf()

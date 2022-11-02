@@ -1,21 +1,5 @@
 [
   {
-  "name": "Textual/Abt-Buy",
-  "task_type": "classification",
-  "vocab": ["0", "1"],
-  "trainset": "../data/er_magellan/Textual/Abt-Buy/train.txt",
-  "validset": "../data/er_magellan/Textual/Abt-Buy/valid.txt",
-  "testset": "../data/er_magellan/Textual/Abt-Buy/test.txt"
-  },
-  {
-    "name": "Dirty/DBLP-GoogleScholar",
-    "task_type": "classification",
-    "vocab": ["0", "1"],
-    "trainset": "../data/er_magellan/Dirty/DBLP-GoogleScholar/train.txt",
-    "validset": "../data/er_magellan/Dirty/DBLP-GoogleScholar/valid.txt",
-    "testset": "../data/er_magellan/Dirty/DBLP-GoogleScholar/test.txt"
-  },
-  {
     "name": "Dirty/iTunes-Amazon",
     "task_type": "classification",
     "vocab": ["0", "1"],
@@ -24,27 +8,11 @@
     "testset": "../data/er_magellan/Dirty/iTunes-Amazon/test.txt"
   },
   {
-    "name": "computers",
+    "name": "Clean/iTunes-Amazon",
     "task_type": "classification",
     "vocab": ["0", "1"],
-    "trainset": "../data/ditto/wdc/computers/train.txt.medium",
-    "validset": "../data/ditto/wdc/computers/valid.txt.medium",
-    "testset": "../data/ditto/wdc/computers/test.txt"
-  },
-  {
-    "name": "Structured/DBLP-GoogleScholar",
-    "task_type": "classification",
-    "vocab": ["0", "1"],
-    "trainset": "../data/er_magellan/Structured/DBLP-GoogleScholar/train.txt",
-    "validset": "../data/er_magellan/Structured/DBLP-GoogleScholar/valid.txt",
-    "testset": "../data/er_magellan/Structured/DBLP-GoogleScholar/test.txt"
-    },
-  {
-    "name": "Structured/DBLP-ACM",
-    "task_type": "classification",
-    "vocab": ["0", "1"],
-    "trainset": "../data/er_magellan/Structured/DBLP-ACM/train.txt",
-    "validset": "../data/er_magellan/Structured/DBLP-ACM/valid.txt",
-    "testset": "../data/er_magellan/Structured/DBLP-ACM/test.txt"
-    }
+    "trainset": "../data/Exp_data/ditto_input/train.txt",
+    "validset": "../data/Exp_data/ditto_input/valid.txt",
+    "testset": "../data/Exp_data/ditto_input/test.txt"
+  }
 ]
